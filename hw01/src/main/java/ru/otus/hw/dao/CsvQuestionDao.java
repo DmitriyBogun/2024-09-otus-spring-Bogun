@@ -9,6 +9,7 @@ import lombok.SneakyThrows;
 import ru.otus.hw.config.QuizFileNameProvider;
 import ru.otus.hw.dao.dto.QuestionDto;
 import ru.otus.hw.domain.Question;
+import ru.otus.hw.exception.QuestionExceptions;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -25,7 +26,9 @@ public class CsvQuestionDao implements QuestionDao {
     public List<Question> findAll() {
         ClassLoader classLoader = getClass().getClassLoader();
         try (InputStream inputStream = classLoader.getResourceAsStream(quizFileNameProvider.getQuizFileName())) {
-
+            if (inputStream == null) {
+                throw new QuestionExceptions("Ресурс не найден или не может быть прочтен");
+            }
             MappingStrategy<QuestionDto> strategy = new ColumnPositionMappingStrategyBuilder<QuestionDto>().build();
             strategy.setType(QuestionDto.class);
 
@@ -44,7 +47,7 @@ public class CsvQuestionDao implements QuestionDao {
             }
             return questionList;
         } catch (Exception e) {
-            throw new Exception("Ошибка чтении списка вопросов", e);
+            throw new QuestionExceptions(String.format("Ошибка чтении списка %s", quizFileNameProvider.getQuizFileName(), e));
         }
     }
 }
