@@ -6,6 +6,7 @@ import com.opencsv.bean.MappingStrategy;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
+import org.springframework.stereotype.Component;
 import ru.otus.hw.config.QuizFileNameProvider;
 import ru.otus.hw.dao.dto.QuestionDto;
 import ru.otus.hw.domain.Question;
@@ -17,8 +18,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
+@Component
 public class CsvQuestionDao implements QuestionDao {
-    @NonNull
+
     private final QuizFileNameProvider quizFileNameProvider;
 
     @SneakyThrows

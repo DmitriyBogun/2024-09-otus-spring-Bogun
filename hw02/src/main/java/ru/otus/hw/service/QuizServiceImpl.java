@@ -1,29 +1,37 @@
 package ru.otus.hw.service;
 
-import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import ru.otus.hw.dao.QuestionDao;
 import ru.otus.hw.domain.Answer;
 import ru.otus.hw.domain.Question;
+import ru.otus.hw.domain.QuizResult;
+import ru.otus.hw.domain.Student;
 
-
+@Service
 @RequiredArgsConstructor
 public class QuizServiceImpl implements QuizService {
 
-    @NonNull
     private final IOService ioService;
 
-    @NonNull
     private final QuestionDao questionDao;
 
     @Override
-    public void executeTest() {
+    public QuizResult executeTest(Student student) {
         ioService.printLine("");
-        ioService.printFormattedLine("Please answer the questions below%n");
-        // Получить вопросы из дао и вывести их с вариантами ответов
+        ioService.printFormattedLine("Ну что, дорогой %s ", student.getFirstName() + ", начнем опрос!");
+        QuizResult quizResult = new QuizResult(student);
         for (Question question : questionDao.findAll()) {
-            ioService.printLine(formatQuestion(question));
+            int numberOfAnswerVariants = question.getAnswers().size();
+            ioService.printFormattedLine(formatQuestion(question));
+            int answerVariant = ioService.readAnswerVariant(1, numberOfAnswerVariants
+                    , "Открой глаза и посмотри, сколько вариантов ответов! Выбери вариант от 1 до "
+                            + numberOfAnswerVariants);
+            Answer answer = question.getAnswers().get(answerVariant - 1);
+            boolean correct = answer.isCorrect();
+            quizResult.applyAnswer(question, correct);
         }
+        return quizResult;
     }
 
     private static String formatQuestion(Question question) {
