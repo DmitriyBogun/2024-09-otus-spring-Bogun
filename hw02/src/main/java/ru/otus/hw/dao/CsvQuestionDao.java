@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @RequiredArgsConstructor
 @Component
@@ -27,10 +28,9 @@ public class CsvQuestionDao implements QuestionDao {
     @Override
     public List<Question> findAll() {
         ClassLoader classLoader = getClass().getClassLoader();
-        try (InputStream inputStream = classLoader.getResourceAsStream(quizFileNameProvider.getQuizFileName())) {
-            if (inputStream == null) {
-                throw new QuestionExceptions("Ресурс не найден или не может быть прочтен");
-            }
+
+        try (InputStream inputStream = classLoader.getResourceAsStream(
+                Objects.requireNonNull(quizFileNameProvider.getQuizFileName(), "Файл не может быть null"))) {
             MappingStrategy<QuestionDto> strategy = new ColumnPositionMappingStrategyBuilder<QuestionDto>().build();
             strategy.setType(QuestionDto.class);
 
