@@ -1,6 +1,5 @@
 package ru.otus.hw.controller;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -21,13 +20,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
-@DisplayName("Тестирование контроллера книг")
 @WebMvcTest(BookController.class)
 class BookControllerTest {
 
-    private static final long FIRST_BOOK_ID = 1L;
+    private static final long BOOK_ID = 1L;
 
-    private static final long NOT_CONTAIN_BOOK_ID = 1L;
+    private static final long ID_OF_THE_MISSING_BOOK = 1L;
 
     @Autowired
     private MockMvc mvc;
@@ -43,7 +41,7 @@ class BookControllerTest {
 
     @Test
     void shouldAddNewBook() throws Exception {
-        BookDto book = getExampleOfBookDto();
+        BookDto book = getSomeBook();
         BookCreateDto bookCreateDto = new BookCreateDto(null, book.getTitle(), book.getAuthor().getFullName(),
                 book.getGenre().getGenre());
 
@@ -53,28 +51,28 @@ class BookControllerTest {
 
     @Test
     void shouldGetCorrectBook() throws Exception {
-        BookDto bookDto = new BookDto(FIRST_BOOK_ID, "B",
+        BookDto bookDto = new BookDto(BOOK_ID, "B",
                 new AuthorDto(1L, "A"), new GenreDto(1L, "G"));
 
-        given(bookService.findById(FIRST_BOOK_ID))
+        given(bookService.findById(BOOK_ID))
                 .willReturn(bookDto);
 
-        mvc.perform(get("/book/edit_book").param("id", String.valueOf(FIRST_BOOK_ID)))
+        mvc.perform(get("/book/edit_book").param("id", String.valueOf(BOOK_ID)))
                 .andExpect(status().isOk());
     }
 
     @Test
     void shouldGetNotFoundEntity() throws Exception {
-        given(bookService.findById(NOT_CONTAIN_BOOK_ID))
+        given(bookService.findById(ID_OF_THE_MISSING_BOOK))
                 .willThrow(new EntityNotFoundException(null));
 
-        mvc.perform(get("/book/edit_book").param("id", String.valueOf(NOT_CONTAIN_BOOK_ID)))
+        mvc.perform(get("/book/edit_book").param("id", String.valueOf(ID_OF_THE_MISSING_BOOK)))
                 .andExpect(status().isNotFound());
     }
 
     @Test
     void shouldUpdateBook() throws Exception {
-        BookDto book = getExampleOfBookDto();
+        BookDto book = getSomeBook();
         given(bookService.findById(book.getId())).willReturn(book);
 
         BookUpdateDto bookUpdateDto = new BookUpdateDto(book.getId(), book.getTitle(),
@@ -84,18 +82,17 @@ class BookControllerTest {
                 .andExpect(redirectedUrl("/book"));
     }
 
-    @DisplayName("Должен удалить книгу")
     @Test
     void shouldDeleteBook() throws Exception {
-        mvc.perform(post("/book/delete").param("id", String.valueOf(FIRST_BOOK_ID)))
+        mvc.perform(post("/book/delete").param("id", String.valueOf(BOOK_ID)))
                 .andExpect(redirectedUrl("/book"));
     }
 
-    private BookDto getExampleOfBookDto() {
-        given(authorService.findAll()).willReturn(List.of(new AuthorDto(1L, "A")));
-        given(genreService.findAll()).willReturn(List.of(new GenreDto(1L, "G")));
+    private BookDto getSomeBook() {
+        given(authorService.findAll()).willReturn(List.of(new AuthorDto(1L, "Some Author")));
+        given(genreService.findAll()).willReturn(List.of(new GenreDto(1L, "Some Genre")));
 
-        return new BookDto(FIRST_BOOK_ID, "a",
+        return new BookDto(BOOK_ID, "Some Book",
                 authorService.findAll().get(0),
                 genreService.findAll().get(0));
     }

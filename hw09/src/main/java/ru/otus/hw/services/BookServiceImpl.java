@@ -69,8 +69,6 @@ public class BookServiceImpl implements BookService {
         }else {
             genre = genreOptional.get();
         }
-        genre.setGenre(bookDto.getGenre());
-        genre = genreRepository.save(genre);
 
         Book book = bookMapper.toModel(bookDto, author, genre);
         return bookMapper.toDto(bookRepository.save(book));

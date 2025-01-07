@@ -42,14 +42,20 @@
     </div>
     <br>
 
+    <div class="row">
         <label for="Author">Author:</label>
         <input name="authorName" type="text" id="Author">
-
+        <div class="errors" th:if="${#fields.hasErrors('authorName')}"
+             th:errors="*{authorName}">Wrong author error</div>
+    </div>
     <br>
 
+    <div class="row">
         <label for="Genre">Genre:</label>
-        <input name="Genre" type="text" id="Genre">
-
+        <input name="genre" type="text" id="Genre">
+        <div class="errors" th:if="${#fields.hasErrors('genre')}"
+        th:errors="*{genre}">Wrong genre error</div>
+    </div>
     <br>
 
     <div class="row">

@@ -15,7 +15,6 @@ public class Application {
 		System.out.println();
 		System.out.println("http://localhost:9777/authors - список авторов");
 		System.out.println("http://localhost:9777/genres - список жанров");
-		System.out.println("http://localhost:9777/book_comments?id=1 - список комментариев для книги");
 	}
 
 }

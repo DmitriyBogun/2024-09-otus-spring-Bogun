@@ -42,7 +42,6 @@
         <th>Title</th>
         <th>Author</th>
         <th>Genre</th>
-        <th>Show comments</th>
         <th>Action</th>
     </tr>
     </thead>
@@ -54,10 +53,6 @@
             <td th:text="*{title}">War and piece</td>
             <td th:text="*{author.fullName}">L. N. Tolstoy</td>
             <td th:text="*{genre.genre}">Classic</td>
-            <td>
-                <a href="comments/book_comments.html"
-                   th:href="@{/book_comments(id=*{id})}">Show comments</a>
-            </td>
             <td>
                 <a href="edit_book.html" th:href="@{/book/edit_book(id=*{id})}">
                     <button class="margin-bottom" type="button">Edit</button>
