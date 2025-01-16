@@ -10,7 +10,7 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>hw01-xml-config</artifactId>
+    <artifactId>hw02-annotation-config</artifactId>
     <version>1.0</version>
 
     <build>
@@ -21,7 +21,7 @@
                 <version>${maven.shade.plugin.version}</version>
                 <executions>
                     <execution>
-                        <id>homeworks_01</id>
+                        <id>homework_02</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>

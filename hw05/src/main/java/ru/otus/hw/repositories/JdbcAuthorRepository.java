@@ -33,10 +33,7 @@ public class JdbcAuthorRepository implements AuthorRepository {
         List<Author> authors = operations
                 .query("select id, full_name from authors where id = :id",
                         parameterSource, new AuthorRowMapper());
-        if (authors.size() == 1) {
-            return Optional.of(authors.get(0));
-        }
-        return Optional.empty();
+        return authors.stream().findAny();
     }
 
     private static class AuthorRowMapper implements RowMapper<Author> {
