@@ -26,6 +26,7 @@ public class AuthorServiceImpl implements AuthorService {
                 .stream().map(authorMapper::toDto)
                 .collect(Collectors.toList());
     }
+
     @Transactional(readOnly = true)
     public Author findByFullName(String name){
         Optional<Author> result = authorRepository.findByFullName(name);
