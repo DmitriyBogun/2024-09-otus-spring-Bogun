@@ -59,7 +59,7 @@ public class BookController {
     public String updateBook(@Valid @ModelAttribute("book") BookUpdateDto book,
                              BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "redirect:/book";
+            return "/edit_book?id=%d";
         }
 
         bookService.update(book);
