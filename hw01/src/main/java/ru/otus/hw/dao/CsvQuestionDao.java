@@ -34,10 +34,7 @@ public class CsvQuestionDao implements QuestionDao {
 
             List<QuestionDto> questionDtoList = new CsvToBeanBuilder<QuestionDto>(
                     new InputStreamReader(inputStream))
-                    .withMappingStrategy(strategy)
-                    .withSeparator(';')
-                    .withSkipLines(0)
-                    .build().parse();
+                    .withMappingStrategy(strategy).withSeparator(';').withSkipLines(0).build().parse();
 
             List<Question> questionList = new ArrayList<>(questionDtoList.size());
             for (QuestionDto questionDto : questionDtoList) {
@@ -47,7 +44,8 @@ public class CsvQuestionDao implements QuestionDao {
             }
             return questionList;
         } catch (Exception e) {
-            throw new QuestionExceptions(String.format("Ошибка чтении списка %s", quizFileNameProvider.getQuizFileName(), e));
+            throw new QuestionExceptions(String
+                    .format("Ошибка чтении списка %s", quizFileNameProvider.getQuizFileName(), e));
         }
     }
 }
