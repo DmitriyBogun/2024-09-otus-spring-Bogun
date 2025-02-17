@@ -13,7 +13,9 @@ import ru.otus.hw.domain.Student;
 public class QuizRunnerServiceImpl implements CommandLineRunner {
 
     private final QuizService quizService;
+
     private final StudentService studentService;
+
     private final ResultService resultService;
 
     @Override

@@ -16,9 +16,12 @@ public class ResultServiceImpl implements ResultService {
     public void showQuizResult(QuizResult result) {
 
         ioService.printLineLocalized("Result.service.result");
-        ioService.prinfFormattedLineLocalized("Result.service.student", result.getStudent().getFullName());
-        ioService.prinfFormattedLineLocalized("Result.service.answered.number", result.getAnsweredQuestions().size());
-        ioService.prinfFormattedLineLocalized("Result.service.right.answers.number", result.getNumberOfCorrectAnswers());
+        ioService.prinfFormattedLineLocalized("Result.service.student",
+                result.getStudent().getFullName());
+        ioService.prinfFormattedLineLocalized("Result.service.answered.number",
+                result.getAnsweredQuestions().size());
+        ioService.prinfFormattedLineLocalized("Result.service.right.answers.number",
+                result.getNumberOfCorrectAnswers());
 
         if (result.getNumberOfCorrectAnswers() >= quizConfig.getNumberOfCorrectAnswersToSuccessfullyPass()) {
             ioService.printLineLocalized("Result.service.success");

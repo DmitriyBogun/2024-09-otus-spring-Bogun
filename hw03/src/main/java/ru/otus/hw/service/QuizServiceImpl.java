@@ -22,10 +22,10 @@ public class QuizServiceImpl implements QuizService {
         ioService.printLine("TestService.excecute.greeting");
         QuizResult quizResult = new QuizResult(student);
         for (Question question : questionDao.findAll()) {
-            int numberOfAnswerVariants = question.getAnswers().size();//1
+            int numberOfAnswerVariants = question.getAnswers().size();
             ioService.printFormattedLine(formatQuestion(question));
-            int answerVariant = ioService.readAnswerVariant(1, numberOfAnswerVariants
-                    , ioService.getMessage("TestService.excecute.number.format.read.error", numberOfAnswerVariants));
+            int answerVariant = ioService.readAnswerVariant(1, numberOfAnswerVariants,
+                    ioService.getMessage("TestService.excecute.number.format.read.error", numberOfAnswerVariants));
             Answer answer;
             if (numberOfAnswerVariants == 1) {
                 answer = question.getAnswers().get(answerVariant);

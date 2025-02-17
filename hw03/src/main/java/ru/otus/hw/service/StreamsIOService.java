@@ -11,7 +11,9 @@ import java.util.Scanner;
 public class StreamsIOService implements IOService {
 
     private static final int NUMBER_ATTEMPTS = 10;
+
     private final PrintStream printStream;
+
     private final Scanner scanner;
 
     public StreamsIOService(@Value("#{T(System).out}") PrintStream printStream,
@@ -35,6 +37,7 @@ public class StreamsIOService implements IOService {
         printLine(prompt);
         return scanner.nextLine();
     }
+
     @Override
     public int readAnswerVariant(int min, int max, String errorMessage) {
         for (int i = 0; i < NUMBER_ATTEMPTS; i++) {
