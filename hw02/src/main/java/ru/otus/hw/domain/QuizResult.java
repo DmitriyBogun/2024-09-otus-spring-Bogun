@@ -7,8 +7,11 @@ import java.util.List;
 
 @Data
 public class QuizResult {
+
     private Student student;
+
     private List<Question> answeredQuestions;
+
     private int numberOfCorrectAnswers;
 
     public QuizResult(Student student) {

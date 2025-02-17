@@ -10,7 +10,9 @@ import ru.otus.hw.domain.Student;
 public class QuizRunnerServiceImpl implements QuizRunnerService {
 
     private final QuizService quizService;
+
     private final StudentService studentService;
+
     private final ResultService resultService;
 
     @Override
