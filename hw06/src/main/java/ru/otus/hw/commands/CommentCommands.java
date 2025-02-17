@@ -14,7 +14,6 @@ public class CommentCommands {
 
     private final CommentService commentService;
 
-
     @ShellMethod(value = "Find comment by id", key = "FC")
     public String findById(long id) {
         return commentService.findById(id)
