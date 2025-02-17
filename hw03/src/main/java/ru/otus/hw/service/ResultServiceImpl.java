@@ -10,6 +10,7 @@ import ru.otus.hw.domain.QuizResult;
 public class ResultServiceImpl implements ResultService {
 
     private final QuizConfig quizConfig;
+
     private final LocalizedIOService ioService;
 
     @Override
