@@ -36,10 +36,7 @@ public class CsvQuestionDao implements QuestionDao {
 
             List<QuestionDto> questionDtoList = new CsvToBeanBuilder<QuestionDto>(
                     new InputStreamReader(inputStream))
-                    .withMappingStrategy(strategy)
-                    .withSeparator(';')
-                    .withSkipLines(0)
-                    .build().parse();
+                    .withMappingStrategy(strategy).withSeparator(';').withSkipLines(0).build().parse();
 
             List<Question> questionList = new ArrayList<>(questionDtoList.size());
             for (QuestionDto questionDto : questionDtoList) {
