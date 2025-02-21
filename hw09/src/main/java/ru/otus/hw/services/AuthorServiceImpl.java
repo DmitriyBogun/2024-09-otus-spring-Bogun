@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class AuthorServiceImpl implements AuthorService {
+
     private final AuthorRepository authorRepository;
 
     private final AuthorMapper authorMapper;
@@ -28,7 +29,7 @@ public class AuthorServiceImpl implements AuthorService {
     }
 
     @Transactional(readOnly = true)
-    public Author findByFullName(String name){
+    public Author findByFullName(String name) {
         Optional<Author> result = authorRepository.findByFullName(name);
         return result.orElse(null);
     }

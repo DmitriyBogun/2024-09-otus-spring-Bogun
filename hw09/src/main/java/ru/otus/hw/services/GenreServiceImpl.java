@@ -28,7 +28,7 @@ public class GenreServiceImpl implements GenreService {
     }
 
     @Transactional(readOnly = true)
-    public Genre findByGenre(String genre){
+    public Genre findByGenre(String genre) {
         Optional<Genre> result = genreRepository.findByGenre(genre);
         return result.orElse(null);
     }

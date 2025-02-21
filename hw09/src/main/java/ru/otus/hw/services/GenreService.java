@@ -6,6 +6,8 @@ import ru.otus.hw.models.Genre;
 import java.util.List;
 
 public interface GenreService {
+
     List<GenreDto> findAll();
+
     Genre findByGenre(String genre);
 }

@@ -5,7 +5,13 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+
+
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import ru.otus.hw.dto.BookCreateDto;
 import ru.otus.hw.dto.BookUpdateDto;
@@ -20,6 +26,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/book")
 public class BookController {
+
     private final BookServiceImpl bookService;
 
     private final AuthorServiceImpl authorService;
@@ -49,7 +56,7 @@ public class BookController {
     }
 
     @GetMapping("/new")
-    public String newBook(Model model){
+    public String newBook(Model model) {
         model.addAttribute("book",new BookCreateDto());
         return "books/new_book";
     }

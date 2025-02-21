@@ -6,6 +6,8 @@ import ru.otus.hw.models.Author;
 import java.util.List;
 
 public interface AuthorService {
+
     List<AuthorDto> findAll();
+
     Author findByFullName(String fullName);
 }
