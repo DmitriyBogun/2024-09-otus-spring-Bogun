@@ -1,6 +1,7 @@
 package ru.otus.hw.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @Data
 @AllArgsConstructor

@@ -7,7 +7,6 @@
         <artifactId>home_work</artifactId>
         <version>1.0</version>
     </parent>
-    <groupId>ru.otus.hw</groupId>
     <artifactId>hw09-mvc</artifactId>
     <version>1.0</version>
 

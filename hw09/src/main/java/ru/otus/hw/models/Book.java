@@ -12,8 +12,11 @@ import jakarta.persistence.NamedEntityGraph;
 import jakarta.persistence.NamedAttributeNode;
 import jakarta.persistence.FetchType;
 
-import jakarta.validation.constraints.NotBlank;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+
 
 @Getter
 @Setter
