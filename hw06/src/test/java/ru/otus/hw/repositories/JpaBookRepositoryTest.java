@@ -1,6 +1,5 @@
 package ru.otus.hw.repositories;
 
-import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -31,13 +30,12 @@ class JpaBookRepositoryTest {
     @Autowired
     private TestEntityManager entityManager;
 
-
-    @DisplayName("должен загружать книгу по id")
     @Test
     void shouldReturnCorrectBookById() {
         List<Book> expectedBooks = getDbBooks();
         for(Book expectedBook : expectedBooks) {
             Optional<Book> actualBook = bookRepositoryJpa.findById(expectedBook.getId());
+
             assertThat(actualBook).isPresent()
                     .get()
                     .isEqualTo(expectedBook);
@@ -57,7 +55,9 @@ class JpaBookRepositoryTest {
     void shouldSaveNewBook() {
         Author author = entityManager.find(Author.class, AUTHOR_ID);
         Genre genre = entityManager.find(Genre.class, GENRE_ID);
-        Book addedBook = new Book(BOOK_ID, "TestBook", author, genre);
+        Book addedBook = new Book(0L, "TestBook", author, genre);
+
+        entityManager.merge(addedBook);
 
         bookRepositoryJpa.save(addedBook);
         assertThat(addedBook.getId()).isGreaterThan(0);
