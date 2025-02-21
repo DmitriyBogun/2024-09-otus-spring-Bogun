@@ -59,8 +59,7 @@ public class BookServiceImpl implements BookService {
             author = new Author();
             author.setFullName(bookDto.getAuthorName());
             author = authorRepository.save(author);
-        } else
-        {
+        } else {
             author = authorOptional.get();
         }
         Genre genre;
@@ -69,8 +68,7 @@ public class BookServiceImpl implements BookService {
             genre = new Genre();
             genre.setGenre(bookDto.getGenre());
             genre = genreRepository.save(genre);
-        } else
-        {
+        } else {
             genre = genreOptional.get();
         }
         Book book = bookMapper.toModel(bookDto, author, genre);
