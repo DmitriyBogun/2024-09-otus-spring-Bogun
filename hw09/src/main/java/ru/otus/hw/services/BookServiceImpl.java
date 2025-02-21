@@ -31,6 +31,7 @@ public class BookServiceImpl implements BookService {
 
     private final BookMapper bookMapper;
 
+
     @Transactional(readOnly = true)
     @Override
     public BookDto findById(Long id) {
@@ -39,6 +40,7 @@ public class BookServiceImpl implements BookService {
                         .formatted(id))));
     }
 
+
     @Transactional(readOnly = true)
     @Override
     public List<BookDto> findAll() {
@@ -46,6 +48,7 @@ public class BookServiceImpl implements BookService {
                 .stream().map(bookMapper::toDto)
                 .collect(Collectors.toList());
     }
+
 
     @Transactional
     @Override
@@ -74,6 +77,7 @@ public class BookServiceImpl implements BookService {
         return bookMapper.toDto(bookRepository.save(book));
     }
 
+
     @Transactional
     @Override
     public BookDto update(BookUpdateDto bookDto) {
@@ -93,6 +97,7 @@ public class BookServiceImpl implements BookService {
         Book book = bookMapper.toModel(bookDto, author, genre);
         return bookMapper.toDto(bookRepository.save(book));
     }
+
 
     @Transactional
     @Override

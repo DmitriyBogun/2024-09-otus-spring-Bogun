@@ -15,9 +15,11 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Service
 public class GenreServiceImpl implements GenreService {
+
     private final GenreRepository genreRepository;
 
     private final GenreMapper genreMapper;
+
 
     @Transactional(readOnly = true)
     @Override
@@ -26,6 +28,7 @@ public class GenreServiceImpl implements GenreService {
                 .map(genreMapper::toDto)
                 .collect(Collectors.toList());
     }
+
 
     @Transactional(readOnly = true)
     public Genre findByGenre(String genre) {
