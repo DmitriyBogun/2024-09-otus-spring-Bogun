@@ -63,7 +63,6 @@ public class BookServiceImpl implements BookService {
         {
             author = authorOptional.get();
         }
-
         Genre genre;
         Optional<Genre> genreOptional = genreRepository.findByGenre(bookDto.getGenre());
         if (genreOptional.isEmpty()) {
@@ -74,7 +73,6 @@ public class BookServiceImpl implements BookService {
         {
             genre = genreOptional.get();
         }
-
         Book book = bookMapper.toModel(bookDto, author, genre);
         return bookMapper.toDto(bookRepository.save(book));
     }
