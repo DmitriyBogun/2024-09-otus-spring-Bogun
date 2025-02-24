@@ -129,5 +129,6 @@
         <module>hw03</module>
         <module>hw05</module>
         <module>hw09</module>
+        <module>hw10</module>
     </modules>
 </project>
