@@ -29,7 +29,7 @@ public class CsvQuestionDao implements QuestionDao {
         ClassLoader classLoader = getClass().getClassLoader();
 
         try (InputStream inputStream = classLoader.getResourceAsStream(
-                Objects.requireNonNull(quizFileNameProvider.getQuizFileNameByLocaleTagFileNameByLocaleTag(),
+                Objects.requireNonNull(quizFileNameProvider.getQuizFileNameByLocaleTag(),
                         "Файл не может быть null"))) {
             MappingStrategy<QuestionDto> strategy = new ColumnPositionMappingStrategyBuilder<QuestionDto>().build();
             strategy.setType(QuestionDto.class);
@@ -47,7 +47,7 @@ public class CsvQuestionDao implements QuestionDao {
             return questionList;
         } catch (Exception e) {
             throw new QuestionExceptions(String.format("Ошибка чтении списка %s",
-                    quizFileNameProvider.getQuizFileNameByLocaleTagFileNameByLocaleTag(), e));
+                    quizFileNameProvider.getQuizFileNameByLocaleTag(), e));
         }
     }
 }

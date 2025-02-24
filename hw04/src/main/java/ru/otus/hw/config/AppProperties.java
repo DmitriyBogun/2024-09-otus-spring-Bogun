@@ -26,7 +26,7 @@ public class AppProperties implements QuizFileNameProvider, QuizConfig, LocaleCo
         return locale;
     }
 
-    public String getQuizFileNameByLocaleTagFileNameByLocaleTag() {
+    public String getQuizFileNameByLocaleTag() {
         return quizFileNameByLocaleTag.get(locale);
     }
 }

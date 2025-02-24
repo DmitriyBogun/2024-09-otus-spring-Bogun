@@ -1,46 +1,42 @@
 package ru.otus.hw.service;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.otus.hw.dao.QuestionDao;
 import ru.otus.hw.domain.Answer;
 import ru.otus.hw.domain.Question;
 import ru.otus.hw.domain.QuizResult;
 import ru.otus.hw.domain.Student;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThatList;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Mockito.when;
+import static org.mockito.BDDMockito.given;
 
 
-@ExtendWith(MockitoExtension.class)
+@SpringBootTest
 class TestServiceImplTest {
 
-    @Mock
-    private QuestionDao dao;
-    @Mock
+    @MockBean
+    private QuestionDao questionDao;
+    @MockBean
     private LocalizedIOService ioService;
 
     private QuizServiceImpl quizService;
 
     @BeforeEach
     void setUp() {
-        quizService = new QuizServiceImpl(ioService, dao);
+        quizService = new QuizServiceImpl(ioService, questionDao);
     }
 
     @Test
     void shouldAskOneQuestion() {
-        List<Answer> answers = new ArrayList<>();
-        answers.add(new Answer("Some answer", true));
-        List<Question> questions = new ArrayList<>();
-        questions.add(new Question("Test question",answers));
-        when(dao.findAll()).thenReturn(questions);
+        given(questionDao.findAll()).willReturn(List.of(new Question("Test question",
+                List.of(new Answer("test answer", true)))));
 
         Student student = new Student("Name", "Surname");
         QuizResult quizResult = quizService.executeTest(student);
@@ -50,5 +46,14 @@ class TestServiceImplTest {
         assertThatList(quizResult.getAnsweredQuestions()).isNotEmpty();
         assertThat(quizResult.getAnsweredQuestions().size()).isEqualTo(1);
         assertThat(quizResult.getNumberOfCorrectAnswers()).isEqualTo(1);
+    }
+
+    @Test
+    void shouldNotHaveResultsForNullStudent() {
+        QuizResult testResult = quizService.executeTest(null);
+        Assertions.assertThat(testResult).isNotNull();
+        Assertions.assertThat(testResult.getStudent()).isNull();
+        assertThatList(testResult.getAnsweredQuestions()).isEmpty();
+        Assertions.assertThat(testResult.getNumberOfCorrectAnswers()).isEqualTo(0);
     }
 }
