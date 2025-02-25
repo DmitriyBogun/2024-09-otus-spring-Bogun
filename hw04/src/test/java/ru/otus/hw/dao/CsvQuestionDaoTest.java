@@ -41,6 +41,6 @@ class CsvQuestionDaoTest {
     void shouldNotThrowExceptions() {
         given(appProperties.getQuizFileNameByLocaleTag()).willReturn("questions-test.csv");
         assertThatList(questionDao.findAll()).isNotNull().isNotEmpty()
-                .hasSize(1);
+                .hasSize(2);
     }
 }
