@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class BookCreateDto {
+
     private Long id;
 
     @NotBlank(message = "Book title can't be null")

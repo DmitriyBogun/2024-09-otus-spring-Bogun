@@ -8,12 +8,7 @@ public class Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-		System.out.println("http://localhost:9777/api/book - список книг");
-		System.out.println("http://localhost:9777/book/new - создание книги");
-		System.out.println("http://localhost:9777/book/edit_book?id=1 - редактирование книги");
-		System.out.println();
-		System.out.println("http://localhost:9777/authors - список авторов");
-		System.out.println("http://localhost:9777/genres - список жанров");
+		System.out.println("http://localhost:9000/api/book - book list");
 	}
 
 }

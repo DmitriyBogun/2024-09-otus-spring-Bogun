@@ -10,6 +10,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class AuthorDto {
+
     @NotNull(message = "Author id is can't be null!")
     private Long id;
 
