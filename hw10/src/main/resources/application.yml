@@ -21,4 +21,4 @@ logging:
     ROOT: ERROR
 
 server:
-  port: 9777
+  port: 9000
