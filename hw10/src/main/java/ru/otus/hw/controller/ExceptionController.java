@@ -3,13 +3,13 @@ package ru.otus.hw.controller;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.otus.hw.exceptions.EntityNotFoundException;
 
 import java.util.List;
 
-@ControllerAdvice
+@RestControllerAdvice
 public class ExceptionController {
 
     @ExceptionHandler(EntityNotFoundException.class)
