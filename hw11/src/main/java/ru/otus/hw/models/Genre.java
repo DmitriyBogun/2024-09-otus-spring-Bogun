@@ -23,7 +23,7 @@ public class Genre {
     private String genre;
 
     @PersistenceCreator
-    public Genre(String id, @NotNull String genre){
+    public Genre(String id, @NotNull String genre) {
         this.id = id;
         this.genre = genre;
     }
