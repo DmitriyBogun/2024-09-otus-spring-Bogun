@@ -4,6 +4,8 @@ spring:
       port: 27017
       database: mongoTestDB
       host: localhost
+  main:
+    allow-bean-definition-overriding: true
 
 mongock:
   runner-type: initializingbean
