@@ -20,6 +20,6 @@ public class Comment {
 
     private String text;
 
-    @DBRef(db = "books", lazy = true)
+    @DBRef(lazy = true)
     private Book book;
 }
