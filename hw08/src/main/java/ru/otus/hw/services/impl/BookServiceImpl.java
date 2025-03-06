@@ -27,19 +27,16 @@ public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
 
     @Override
-    @Transactional(readOnly = true)
     public List<Book> findAll() {
         return bookRepository.findAll();
     }
 
     @Override
-    @Transactional(readOnly = true)
     public Optional<Book> findById(String id) {
         return bookRepository.findById(id);
     }
 
     @Override
-    @Transactional
     public Book create(String title, String authorId, String genreId) {
         Author author = authorRepository.findById(authorId)
                 .orElseThrow(() -> new EntityNotFoundException((
@@ -52,7 +49,6 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public Book update(String id, String title, String authorId, String genreId) {
 
         Book updatedBook = bookRepository.findById(id)
@@ -75,12 +71,10 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    @Transactional
     public void deleteById(String id) {
         bookRepository.deleteById(id);
     }
 
-    @Transactional(readOnly = true)
     public List<Author> findAllAuthors() {
         List<Author> authors = new ArrayList<>();
         for (Book book : bookRepository.findDistinctAuthors()) {
