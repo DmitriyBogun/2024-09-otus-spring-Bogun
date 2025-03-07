@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit book</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        .errors {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Book edition -->
+<form id="new-book-form" action="books/new_book.html"
+      th:action="@{/book/create_book}"
+      th:method="POST" th:object="${book}">
+    <h3>Book Info:</h3>
+
+
+    <div class="row">
+        <label for="id-input">ID:</label>
+        <input id="id-input" type="text" readonly="readonly" value="1" th:value="*{id}"/>
+    </div>
+    <br>
+
+    <div class="row">
+        <label for="book-title-input">Title:</label>
+        <input id="book-title-input" name="title" type="text" value="New book" th:value="*{title}"/>
+        <div class="errors" th:if="${#fields.hasErrors('title')}"
+             th:errors="*{title}">Wrong book title error</div>
+    </div>
+    <br>
+
+    <div class="row">
+        <label for="Author">Author:</label>
+        <input name="authorName" type="text" id="Author">
+        <div class="errors" th:if="${#fields.hasErrors('authorName')}"
+             th:errors="*{authorName}">Wrong author error</div>
+    </div>
+    <br>
+
+    <div class="row">
+        <label for="Genre">Genre:</label>
+        <input name="genre" type="text" id="Genre">
+        <div class="errors" th:if="${#fields.hasErrors('genre')}"
+        th:errors="*{genre}">Wrong genre error</div>
+    </div>
+    <br>
+
+    <div class="row">
+        <button type="submit">Save</button>
+        <a href="all_books.html" th:href="@{/book}">
+            <button type="button">Cancel</button>
+        </a>
+    </div>
+</form>
+
+</body>
+</html>
