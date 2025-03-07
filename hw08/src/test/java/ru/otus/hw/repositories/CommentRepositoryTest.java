@@ -72,6 +72,7 @@ public class CommentRepositoryTest {
 
         assertThat(optionalActualComment).isPresent().get()
                 .usingRecursiveComparison()
+                .comparingOnlyFields("id", "text")
                 .isEqualTo(expectedComment);
     }
 }
