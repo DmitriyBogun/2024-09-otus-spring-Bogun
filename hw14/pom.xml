@@ -23,7 +23,7 @@
         </checkstyle.config.url>
         <guava.version>32.1.2-jre</guava.version>
         <mongock.version>4.3.8</mongock.version>
-        <flapdoodle.version>4.0.2</flapdoodle.version>
+        <flapdoodle.version>4.6.1</flapdoodle.version>
     </properties>
 
     <dependencies>

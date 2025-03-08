@@ -29,7 +29,7 @@ de:
   flapdoodle:
     mongodb:
       embedded:
-        version: 4.0.2
+        version: 4.6.1
 
 mongock:
   runner-type: applicationrunner
