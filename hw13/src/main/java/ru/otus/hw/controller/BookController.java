@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ru.otus.hw.dto.BookCreateDto;
 import ru.otus.hw.dto.BookUpdateDto;
 import ru.otus.hw.dto.BookDto;
-import ru.otus.hw.services.impl.AuthorServiceImpl;
-import ru.otus.hw.services.impl.BookServiceImpl;
-import ru.otus.hw.services.impl.GenreServiceImpl;
+import ru.otus.hw.services.AuthorService;
+import ru.otus.hw.services.BookService;
+import ru.otus.hw.services.GenreService;
 
 import java.util.List;
 
@@ -27,11 +27,11 @@ import java.util.List;
 @RequestMapping("/book")
 public class BookController {
 
-    private final BookServiceImpl bookService;
+    private final BookService bookService;
 
-    private final AuthorServiceImpl authorService;
+    private final AuthorService authorService;
 
-    private final GenreServiceImpl genreService;
+    private final GenreService genreService;
 
     @GetMapping()
     public String allBooksList(Model model) {

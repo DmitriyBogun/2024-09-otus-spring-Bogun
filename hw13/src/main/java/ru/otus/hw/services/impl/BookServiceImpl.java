@@ -1,6 +1,7 @@
 package ru.otus.hw.services.impl;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.otus.hw.dto.BookCreateDto;
@@ -32,6 +33,7 @@ public class BookServiceImpl implements BookService {
     private final BookMapper bookMapper;
 
 
+    @PreAuthorize("hasRole('USER')")
     @Transactional(readOnly = true)
     @Override
     public BookDto findById(Long id) {
@@ -41,6 +43,7 @@ public class BookServiceImpl implements BookService {
     }
 
 
+    @PreAuthorize("hasRole('USER')")
     @Transactional(readOnly = true)
     @Override
     public List<BookDto> findAll() {
@@ -50,6 +53,7 @@ public class BookServiceImpl implements BookService {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     @Override
     public BookDto create(BookCreateDto bookDto) {
@@ -63,10 +67,12 @@ public class BookServiceImpl implements BookService {
                 .orElseThrow(() ->
                         new EntityNotFoundException("Genre with id %d not found".formatted(genreId)));
         Book book = bookMapper.toModel(bookDto, author, genre);
-        return bookMapper.toDto(bookRepository.save(book));
+        Book savedBook = bookRepository.save(book);
+        return bookMapper.toDto(savedBook);
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     @Override
     public BookDto update(BookUpdateDto bookDto) {
@@ -88,6 +94,7 @@ public class BookServiceImpl implements BookService {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Transactional
     @Override
     public void deleteById(Long id) {

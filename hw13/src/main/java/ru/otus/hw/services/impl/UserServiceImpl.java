@@ -2,6 +2,7 @@ package ru.otus.hw.services.impl;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.otus.hw.dto.UserCreateDto;
@@ -26,6 +27,7 @@ public class UserServiceImpl implements UserService {
 
     private final PasswordEncoder encoder;
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public List<UserDto> findAll() {
         List<UserDto> userDtos = repository.findAll()
@@ -34,6 +36,7 @@ public class UserServiceImpl implements UserService {
         return userDtos;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public UserDto findByUsername(String username) {
         UserDto userDto = mapper.toDto(repository.findByUsername(username).orElseThrow(() ->
@@ -42,6 +45,7 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public UserDto createUser(UserCreateDto createDto) {
         User user = mapper.toModel(createDto, encoder);
@@ -49,6 +53,7 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public UserDto updateUser(UserUpdateDto updateDto) {
         User user = mapper.toModel(updateDto, encoder);
@@ -56,6 +61,7 @@ public class UserServiceImpl implements UserService {
         return userDto;
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @Override
     public void deleteUser(@NotNull UserDto dto) {
         repository.delete(mapper.toModel(dto, encoder));
